@@ -1,5 +1,6 @@
 package br.edu.infnet.banco.service;
 
+import br.edu.infnet.banco.exceptions.ContaNaoEncontradaException;
 import br.edu.infnet.banco.model.Conta;
 import br.edu.infnet.banco.repository.ContaRepository;
 import org.springframework.stereotype.Service;
@@ -19,13 +20,21 @@ public class ContaService {
     }
 
     public Conta consultarConta(Long id) {
-        return contaRepository.findById(id).orElseThrow(() -> new RuntimeException("ERRO: Conta não encontrada"));
+        return contaRepository.findById(id).orElseThrow(() -> new ContaNaoEncontradaException(id));
     }
 
     public Conta criarConta(Conta conta) {
         return contaRepository.save(conta);
     }
 
+    public void excluirConta(Long id) {
+        Conta conta = consultarConta(id);
+        contaRepository.delete(conta);
+    }
 
-
+    public void alterarConta(Long id, double saldo) {
+        Conta conta = consultarConta(id);
+        conta.setSaldo(saldo);
+        contaRepository.save(conta);
+    }
 }

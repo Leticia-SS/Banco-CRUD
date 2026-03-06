@@ -26,10 +26,13 @@ public class BancoCrudApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		consultarTodas();
-		consultarContaId();
-		criarConta();
+		//consultarContaId();
+		//criarConta();
+		alterarConta();
 		System.out.println();
+		//excluirConta();
 		consultarTodas();
+
 	}
 
 	public void consultarTodas() {
@@ -46,5 +49,14 @@ public class BancoCrudApplication implements CommandLineRunner {
 	public void criarConta() {
 		Conta conta = new Conta(null, "Sarah", 400);
 		contaService.criarConta(conta);
+	}
+
+	public void excluirConta() {
+		Long id = 1L;
+		contaService.excluirConta(id);
+	}
+
+	public void alterarConta() {
+		contaService.alterarConta(1L, 20000);
 	}
 }
