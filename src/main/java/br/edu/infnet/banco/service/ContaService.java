@@ -1,7 +1,10 @@
 package br.edu.infnet.banco.service;
 
+import br.edu.infnet.banco.model.Conta;
 import br.edu.infnet.banco.repository.ContaRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ContaService {
@@ -10,5 +13,10 @@ public class ContaService {
     public ContaService(ContaRepository contaRepository) {
         this.contaRepository = contaRepository;
     }
+
+    public List<Conta> consultarContas() {
+        return contaRepository.findAll();
+    }
+
 
 }
