@@ -26,10 +26,25 @@ public class BancoCrudApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		consultarTodas();
+		consultarContaId();
+		criarConta();
+		System.out.println();
+		consultarTodas();
 	}
 
 	public void consultarTodas() {
 		List<Conta> contas = contaService.consultarContas();
 		contas.forEach(conta -> System.out.println(conta));
+	}
+
+	public void consultarContaId() {
+		Long id = 1L;
+		Conta conta = contaService.consultarConta(id);
+		System.out.println(conta);
+    }
+
+	public void criarConta() {
+		Conta conta = new Conta(null, "Sarah", 400);
+		contaService.criarConta(conta);
 	}
 }

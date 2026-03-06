@@ -18,5 +18,14 @@ public class ContaService {
         return contaRepository.findAll();
     }
 
+    public Conta consultarConta(Long id) {
+        return contaRepository.findById(id).orElseThrow(() -> new RuntimeException("ERRO: Conta não encontrada"));
+    }
+
+    public Conta criarConta(Conta conta) {
+        return contaRepository.save(conta);
+    }
+
+
 
 }
